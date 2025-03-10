@@ -55,9 +55,6 @@ This project uses the [TMDb API](https://www.themoviedb.org/documentation/api) t
 ## Contributing
 Feel free to contribute! Fork the repository and submit a pull request with improvements or new features.
 
-## License
-This project is open-source and available under the MIT License.
-
 ---
 *Made with by [Krish](https://github.com/Krish-Kavya-02)*
 
