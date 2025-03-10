@@ -1,4 +1,4 @@
-# 🍒🍒 NutFLEX - Latest Movie and TV Shows Update
+# NutFLEX - Latest Movie and TV Shows Update
 
 ## Overview
 NutFLEX is a dynamic and interactive movie and TV show dashboard that provides real-time updates on the latest releases and trending content. Built with React.js, it integrates the TMDb API to fetch and display movie and TV show data, allowing users to search by name or genre and view details such as ratings, trailers, cast information, and summaries.
