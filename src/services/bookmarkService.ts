@@ -9,7 +9,7 @@ export type BookmarkItem = {
   added_at: number;
 };
 
-const BOOKMARK_KEY = "movieVault_bookmarks";
+const BOOKMARK_KEY = "nutFLEX_bookmarks";
 
 export const getBookmarks = (): BookmarkItem[] => {
   const bookmarks = localStorage.getItem(BOOKMARK_KEY);
