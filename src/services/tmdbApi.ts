@@ -1,5 +1,5 @@
 
-const API_KEY = "3fd2be6f0c70a2a598f084ddfb75487c"; // This is a public API key for TMDB
+const API_KEY = "67fc5461bcc5c46713dbb52d5d86d365"; // Updated API key
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
@@ -78,6 +78,9 @@ export const getBackdropUrl = (path: string | null, size: string = "original"): 
 export const fetchTrending = async (mediaType: "movie" | "tv" = "movie", timeWindow: "day" | "week" = "week"): Promise<Movie[] | TVShow[]> => {
   try {
     const response = await fetch(`${BASE_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -89,6 +92,9 @@ export const fetchTrending = async (mediaType: "movie" | "tv" = "movie", timeWin
 export const fetchGenres = async (mediaType: "movie" | "tv" = "movie"): Promise<Genre[]> => {
   try {
     const response = await fetch(`${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
     const data = await response.json();
     return data.genres;
   } catch (error) {
@@ -100,6 +106,9 @@ export const fetchGenres = async (mediaType: "movie" | "tv" = "movie"): Promise<
 export const fetchByGenre = async (genreId: number, mediaType: "movie" | "tv" = "movie", page: number = 1): Promise<Movie[] | TVShow[]> => {
   try {
     const response = await fetch(`${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -112,6 +121,9 @@ export const searchMedia = async (query: string, mediaType: "movie" | "tv" = "mo
   if (!query) return [];
   try {
     const response = await fetch(`${BASE_URL}/search/${mediaType}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
     const data = await response.json();
     return data.results;
   } catch (error) {
@@ -123,6 +135,9 @@ export const searchMedia = async (query: string, mediaType: "movie" | "tv" = "mo
 export const fetchMediaDetails = async (id: number, mediaType: "movie" | "tv" = "movie"): Promise<MediaDetails | null> => {
   try {
     const response = await fetch(`${BASE_URL}/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
     const data = await response.json();
     
     // Format the data to include cast and standardize the response

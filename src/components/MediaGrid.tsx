@@ -1,14 +1,37 @@
 
 import { Movie, TVShow } from "@/services/tmdbApi";
 import MovieCard from "./MovieCard";
+import { AlertTriangle } from "lucide-react";
 
 interface MediaGridProps {
   items: (Movie | TVShow)[];
   mediaType: "movie" | "tv";
   className?: string;
+  isLoading?: boolean;
+  error?: string | null;
 }
 
-const MediaGrid = ({ items, mediaType, className = "" }: MediaGridProps) => {
+const MediaGrid = ({ items, mediaType, className = "", isLoading = false, error = null }: MediaGridProps) => {
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {[...Array(10)].map((_, index) => (
+          <div key={index} className="aspect-[2/3] bg-muted rounded-md animate-pulse"></div>
+        ))}
+      </div>
+    );
+  }
+  
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center">
+        <AlertTriangle className="h-10 w-10 text-destructive mb-4" />
+        <h3 className="text-xl font-medium text-destructive">Error loading content</h3>
+        <p className="text-muted-foreground mt-2">{error}</p>
+      </div>
+    );
+  }
+
   if (!items.length) {
     return (
       <div className="flex flex-col items-center justify-center py-20">
