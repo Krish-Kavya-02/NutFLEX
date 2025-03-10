@@ -28,6 +28,9 @@ const MediaGrid = ({ items, mediaType, className = "", isLoading = false, error 
         <AlertTriangle className="h-10 w-10 text-destructive mb-4" />
         <h3 className="text-xl font-medium text-destructive">Error loading content</h3>
         <p className="text-muted-foreground mt-2">{error}</p>
+        <p className="text-sm text-muted-foreground mt-4">
+          Please check your internet connection or try again later.
+        </p>
       </div>
     );
   }
@@ -36,6 +39,9 @@ const MediaGrid = ({ items, mediaType, className = "", isLoading = false, error 
     return (
       <div className="flex flex-col items-center justify-center py-20">
         <h3 className="text-xl font-medium text-muted-foreground">No results found</h3>
+        <p className="text-sm text-muted-foreground mt-2">
+          Try adjusting your search or filters
+        </p>
       </div>
     );
   }

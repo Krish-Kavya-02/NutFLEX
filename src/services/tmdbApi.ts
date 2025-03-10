@@ -77,7 +77,13 @@ export const getBackdropUrl = (path: string | null, size: string = "original"): 
 
 export const fetchTrending = async (mediaType: "movie" | "tv" = "movie", timeWindow: "day" | "week" = "week"): Promise<Movie[] | TVShow[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -91,7 +97,13 @@ export const fetchTrending = async (mediaType: "movie" | "tv" = "movie", timeWin
 
 export const fetchGenres = async (mediaType: "movie" | "tv" = "movie"): Promise<Genre[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}/genre/${mediaType}/list?api_key=${API_KEY}`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -105,7 +117,13 @@ export const fetchGenres = async (mediaType: "movie" | "tv" = "movie"): Promise<
 
 export const fetchByGenre = async (genreId: number, mediaType: "movie" | "tv" = "movie", page: number = 1): Promise<Movie[] | TVShow[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`);
+    const response = await fetch(`${BASE_URL}/discover/${mediaType}?api_key=${API_KEY}&with_genres=${genreId}&page=${page}`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -120,7 +138,13 @@ export const fetchByGenre = async (genreId: number, mediaType: "movie" | "tv" = 
 export const searchMedia = async (query: string, mediaType: "movie" | "tv" = "movie"): Promise<Movie[] | TVShow[]> => {
   if (!query) return [];
   try {
-    const response = await fetch(`${BASE_URL}/search/${mediaType}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
+    const response = await fetch(`${BASE_URL}/search/${mediaType}?api_key=${API_KEY}&query=${encodeURIComponent(query)}`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -134,7 +158,13 @@ export const searchMedia = async (query: string, mediaType: "movie" | "tv" = "mo
 
 export const fetchMediaDetails = async (id: number, mediaType: "movie" | "tv" = "movie"): Promise<MediaDetails | null> => {
   try {
-    const response = await fetch(`${BASE_URL}/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits`);
+    const response = await fetch(`${BASE_URL}/${mediaType}/${id}?api_key=${API_KEY}&append_to_response=videos,credits`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -153,7 +183,13 @@ export const fetchMediaDetails = async (id: number, mediaType: "movie" | "tv" = 
 
 export const fetchTopRated = async (mediaType: "movie" | "tv" = "movie"): Promise<Movie[] | TVShow[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/${mediaType}/top_rated?api_key=${API_KEY}`);
+    const response = await fetch(`${BASE_URL}/${mediaType}/top_rated?api_key=${API_KEY}`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
@@ -171,7 +207,13 @@ export const fetchUpcoming = async (mediaType: "movie" | "tv" = "movie"): Promis
       ? `${BASE_URL}/movie/upcoming?api_key=${API_KEY}` 
       : `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}`;
     
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
