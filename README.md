@@ -59,5 +59,5 @@ Feel free to contribute! Fork the repository and submit a pull request with impr
 This project is open-source and available under the MIT License.
 
 ---
-*Made with by [Krish](https://github.com/yourusername)*
+*Made with by [Krish](https://github.com/Krish-Kavya-02)*
 
