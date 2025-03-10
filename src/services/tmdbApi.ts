@@ -1,5 +1,5 @@
 
-const API_KEY = "67fc5461bcc5c46713dbb52d5d86d365"; // Updated API key
+const API_KEY = "67fc5461bcc5c46713dbb52d5d86d365"; // Public TMDB API key
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
@@ -148,5 +148,37 @@ export const fetchMediaDetails = async (id: number, mediaType: "movie" | "tv" = 
   } catch (error) {
     console.error("Error fetching media details:", error);
     return null;
+  }
+};
+
+export const fetchTopRated = async (mediaType: "movie" | "tv" = "movie"): Promise<Movie[] | TVShow[]> => {
+  try {
+    const response = await fetch(`${BASE_URL}/${mediaType}/top_rated?api_key=${API_KEY}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching top rated:", error);
+    return [];
+  }
+};
+
+export const fetchUpcoming = async (mediaType: "movie" | "tv" = "movie"): Promise<Movie[] | TVShow[]> => {
+  try {
+    const url = mediaType === "movie" 
+      ? `${BASE_URL}/movie/upcoming?api_key=${API_KEY}` 
+      : `${BASE_URL}/tv/on_the_air?api_key=${API_KEY}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Error fetching upcoming content:", error);
+    return [];
   }
 };
