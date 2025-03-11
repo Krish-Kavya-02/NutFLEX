@@ -1,6 +1,6 @@
 
 import { MediaDetails, getBackdropUrl, getPosterUrl } from "@/services/tmdbApi";
-import { PlayCircle, Star, Clock } from "lucide-react";
+import { PlayCircle, Star, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface MediaHeroProps {
@@ -29,7 +29,7 @@ const MediaHero = ({ media, mediaType }: MediaHeroProps) => {
     : media.episode_run_time && media.episode_run_time.length > 0
       ? formatRuntime(media.episode_run_time[0])
       : "";
-  
+
   return (
     <div className="relative">
       {/* Backdrop Image */}
@@ -57,33 +57,36 @@ const MediaHero = ({ media, mediaType }: MediaHeroProps) => {
           
           {/* Content */}
           <div className="flex flex-col justify-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               {title} {releaseYear && <span className="text-muted-foreground">({releaseYear})</span>}
             </h1>
             
             {/* Meta info */}
-            <div className="flex flex-wrap items-center gap-3 mt-3 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-4 mb-6">
               {releaseDate && (
-                <span>{new Date(releaseDate).toLocaleDateString()}</span>
+                <div className="flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  <span>{new Date(releaseDate).toLocaleDateString()}</span>
+                </div>
               )}
               {runtime && (
-                <div className="flex items-center">
-                  <Clock className="h-4 w-4 mr-1" />
+                <div className="flex items-center gap-1">
+                  <Clock className="h-4 w-4" />
                   <span>{runtime}</span>
                 </div>
               )}
-              <div className="flex items-center">
-                <Star className="h-4 w-4 mr-1 text-secondary" />
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 text-secondary" />
                 <span>{media.vote_average.toFixed(1)}/10</span>
               </div>
             </div>
             
             {/* Genres */}
-            <div className="flex flex-wrap gap-2 mt-4">
+            <div className="flex flex-wrap gap-2 mb-6">
               {media.genres.map((genre) => (
                 <span 
                   key={genre.id} 
-                  className="bg-muted px-2 py-1 rounded-md text-xs"
+                  className="bg-muted px-3 py-1 rounded-full text-sm"
                 >
                   {genre.name}
                 </span>
@@ -91,46 +94,16 @@ const MediaHero = ({ media, mediaType }: MediaHeroProps) => {
             </div>
             
             {/* Overview */}
-            <p className="mt-6 text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-8">
               {media.overview}
             </p>
             
             {/* Actions */}
-            <div className="mt-8 flex flex-wrap gap-4">
-              {trailer && (
-                <Button className="gap-2">
-                  <PlayCircle className="h-4 w-4" />
-                  Watch Trailer
-                </Button>
-              )}
-            </div>
-            
-            {/* Cast */}
-            {media.cast && media.cast.length > 0 && (
-              <div className="mt-8">
-                <h3 className="text-xl font-semibold mb-4">Cast</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {media.cast.slice(0, 5).map((person) => (
-                    <div key={person.id} className="flex flex-col items-center text-center">
-                      <div className="w-16 h-16 rounded-full overflow-hidden bg-muted mb-2">
-                        {person.profile_path ? (
-                          <img 
-                            src={getPosterUrl(person.profile_path, "w185")}
-                            alt={person.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-muted text-muted-foreground">
-                            {person.name.charAt(0)}
-                          </div>
-                        )}
-                      </div>
-                      <span className="text-sm font-medium">{person.name}</span>
-                      <span className="text-xs text-muted-foreground">{person.character}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            {trailer && (
+              <Button className="w-fit" size="lg">
+                <PlayCircle className="mr-2" />
+                Watch Trailer
+              </Button>
             )}
           </div>
         </div>

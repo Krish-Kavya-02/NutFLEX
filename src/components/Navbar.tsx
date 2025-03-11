@@ -1,7 +1,7 @@
 
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, Film, Tv, Bookmark, Home } from "lucide-react";
+import { Menu, Cherry, Film, Tv, Bookmark, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
@@ -27,7 +27,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
-          <Film className="h-6 w-6 text-primary" />
+          <Cherry className="h-6 w-6 text-primary" />
           <span className="text-xl font-bold">NutFLEX</span>
         </Link>
 
