@@ -2,6 +2,7 @@
 import { MediaDetails, getBackdropUrl, getPosterUrl } from "@/services/tmdbApi";
 import { PlayCircle, Star, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 interface MediaHeroProps {
   media: MediaDetails;
@@ -29,6 +30,19 @@ const MediaHero = ({ media, mediaType }: MediaHeroProps) => {
     : media.episode_run_time && media.episode_run_time.length > 0
       ? formatRuntime(media.episode_run_time[0])
       : "";
+
+  const handleWatchTrailer = () => {
+    if (trailer) {
+      const youtubeUrl = `https://www.youtube.com/watch?v=${trailer.key}`;
+      window.open(youtubeUrl, '_blank');
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Trailer Not Available",
+        description: "Sorry, no trailer is available for this content."
+      });
+    }
+  };
 
   return (
     <div className="relative">
@@ -100,7 +114,12 @@ const MediaHero = ({ media, mediaType }: MediaHeroProps) => {
             
             {/* Actions */}
             {trailer && (
-              <Button className="w-fit" size="lg">
+              <Button 
+                className="w-fit" 
+                size="lg" 
+                onClick={handleWatchTrailer}
+                variant="default"
+              >
                 <PlayCircle className="mr-2" />
                 Watch Trailer
               </Button>
