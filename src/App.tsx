@@ -24,8 +24,7 @@ const App = () => (
           <Route path="/movies" element={<Movies />} />
           <Route path="/tv" element={<TVShows />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
-          <Route path="/movie/:id" element={<MediaDetails />} />
-          <Route path="/tv/:id" element={<MediaDetails />} />
+          <Route path="/:mediaType/:id" element={<MediaDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
